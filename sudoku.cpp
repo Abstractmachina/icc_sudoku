@@ -48,13 +48,15 @@ void print_frame(int row) {
 }
 
 /* internal helper function */
-void print_row(const char* data, int row) {
-  cout << (char) ('A' + row) << " ";
-  for (int i=0; i<9; i++) {
-    cout << ( (i % 3) ? ':' : '|' ) << " ";
-    cout << ( (data[i]=='.') ? ' ' : data[i]) << " ";
-  }
-  cout << "|\n";
+void print_row(const char* data, int row) 
+{
+ 	 cout << (char) ('A' + row) << " ";
+	 for (int i=0; i<9; i++) 
+	 {
+		 cout << ( (i % 3) ? ':' : '|' ) << " ";
+		 cout << ( (data[i]=='.') ? ' ' : data[i]) << " ";
+	 }
+	 cout << "|\n";
 }
 
 /* pre-supplied function to display a Sudoku board */
@@ -72,3 +74,47 @@ void display_board(const char board[9][9]) {
 }
 
 /* add your functions here */
+bool is_complete(char board[9][9])
+{
+	for (int row = 0; row < 9; row++)
+	{
+		for (int col = 0; col < 9; col++)
+		{
+			//if val is anything but a number
+			if (board[row][col] < 48 || board[row][col] > 57 ) return false;
+		}
+	}
+	return true;
+}
+
+bool make_move(char position[2], char digit, char board[9][9])
+{
+
+	printf("DEBUG | position 0: %c, psotion 1: %c, digit: %c\n", 
+			position[0], position[1], digit);
+	//checking for valid position
+	if (	position[0] < 65 || position[0] > 73 || 
+		position[1] < 49 || position[1] > 57	)
+	{
+		return false;
+	}
+	//checking for valid digit
+	if (digit < 49 || digit > 57) return false;
+	//checking for dup in row
+	for (int col =0; col < 9; col++)
+	{
+		if (board[position[0] - 'A'][col] == digit) 
+			return false;
+	}		
+	//checking for dup in col
+	for (int row = 0; row < 9; row++)
+	{
+		if (board[row][position[1] - 49] == digit) 
+			return false;
+	}		
+
+	//if all checks passed, update value at position
+	board[position[0] - 'A'][position[1] - 49] = digit;
+
+	return true;
+}

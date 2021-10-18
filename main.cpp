@@ -19,6 +19,17 @@ int main() {
   display_board(board);
   cout << "Done!\n\n";
 
+	for (int row = 0; row < 9; row++)
+	{
+		for (int col = 0; col < 9; col++)
+		{
+			cout << char(board[row][col]) << " ";
+			//printf("%i col %i: %i\n", row, col,char(board[row][col]));
+		}
+		cout << endl;
+	}
+
+
   cout << "=================== Question 1 ===================\n\n";
 
   load_board("easy.dat", board);
@@ -34,7 +45,6 @@ int main() {
     cout << "NOT ";
   }
   cout << "complete.\n\n";
-
   cout << "=================== Question 2 ===================\n\n";
 
   load_board("easy.dat", board);
@@ -49,6 +59,7 @@ int main() {
 
   // write more tests
 
+/*
   cout << "=================== Question 3 ===================\n\n";
 
   load_board("easy.dat", board);
@@ -82,7 +93,7 @@ int main() {
   // write more tests
 
   cout << "=================== Question 5 ===================\n\n";
-
+*/
   // write more tests
 
   return 0;
