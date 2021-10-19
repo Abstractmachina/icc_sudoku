@@ -68,18 +68,17 @@ int main() {
     cout << "Save board failed.\n";
   }
   cout << '\n';
-/*
 
   cout << "=================== Question 4 ===================\n\n";
 
   load_board("easy.dat", board);
   if (solve_board(board)) {
     cout << "The 'easy' board has a solution:\n";
-    display_board(board);
   } else {
     cout << "A solution cannot be found.\n";
   }
   cout << '\n';
+    display_board(board);
 
   load_board("medium.dat", board);
   if (solve_board(board)) {
@@ -93,8 +92,35 @@ int main() {
   // write more tests
 
   cout << "=================== Question 5 ===================\n\n";
-*/
   // write more tests
 
+
+	load_board("mystery1.dat", board);
+	cout << "Mystery 1 has " << countDigits(board) << " pre-filled digits.\n";
+	if (solve_board(board)) 
+	{
+		cout << "Mystery 1 has a solution.\n";
+	}
+    	display_board(board);
+
+	/*load_board("mystery2.dat", board);
+	if (solve_board(board)) 
+	{
+		cout << "Mystery 2 has a solution.\n";
+	}
+    	display_board(board);
+*/
+	load_board("mystery3.dat", board);
+	cout << "Mystery 3 has " << countDigits(board) << " pre-filled digits.\n";
+	if (solve_board(board)) 
+	{
+		cout << "Mystery 3 has a solution.\n";
+	}
+    	display_board(board);
+
+	load_board("easy.dat", board);
+	cout << "Easy has " << countDigits(board) << " pre-filled digits.\n";
+	load_board("medium.dat", board);
+	cout << "Medium has " << countDigits(board) << " pre-filled digits.\n";
   return 0;
 }
