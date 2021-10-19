@@ -13,5 +13,7 @@ bool is_complete(char board[9][9]);
 //and digit is invalid or already exists in row/column.
 bool make_move(char position[2], char digit, char board[9][9]);
 
+//save board to .dat file.
+bool save_board(const char* filename, char board[9][9]);
 
 #endif

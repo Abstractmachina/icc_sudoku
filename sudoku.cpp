@@ -118,3 +118,29 @@ bool make_move(char position[2], char digit, char board[9][9])
 
 	return true;
 }
+
+bool save_board(const char* filename, char board[9][9])
+{
+	ofstream out;
+	out.open(filename);
+
+	if (out.fail())
+	{
+		cout << "Save unsuccessful!\n";
+		return false;
+	}
+
+	for(int row = 0; row < 9; row++)
+	{
+		for (int col = 0; col < 9; col++)
+		{
+			out << board[row][col];
+		}
+		out << endl;
+	}
+
+	out.close();
+
+
+	return true;
+}
