@@ -83,7 +83,6 @@ bool is_complete(char board[9][9])
 		{
 			//if val is anything but 1 - 9
 			if (!isValidDigit(board[row][col])) return false;
-			//if (board[row][col] < 48 || board[row][col] > 57 ) return false;
 		}
 	}
 	return true;
@@ -92,16 +91,9 @@ bool is_complete(char board[9][9])
 //
 bool make_move(char position[2], char digit, char board[9][9])
 {
-
-	//printf("DEBUG | position 0: %c, psotion 1: %c, digit: %c\n", 
-	//		position[0], position[1], digit);
-	
-	//check for valid input	
-	if (!isValidPos(position) || !isValidDigit(digit)) return false;
-	//check for duplicate number
-	if (	isDupInRow(digit, position[0], board) || 
-		isDupInCol(digit, position[1], board)	) 
-		return false;
+	if (!isValidPos(position)) return false;
+	//check for duplicate entry
+	if (isDup(digit, position, board)) return false;
 
 	//if all checks passed, update value at position
 	board[position[0] - 'A'][position[1] - 49] = digit;
@@ -173,7 +165,8 @@ bool solve_board(char board[9][9])
 /***************	UTILITY FUNCTIONS	******************/
 
 
-//Find the first empty position, iterating from top left to bottom right sequentially
+//Find the first empty position, iterating from top left to bottom right sequentially.
+//updates position with found values.
 bool findEmptyPos(char position[2], char board[9][9])
 {
 	for (int row = 0; row < 9; row++)
@@ -199,7 +192,7 @@ bool isDup(char digit, char position[2], char board[9][9])
 		isDupInSub(digit, position, board)	) return true;
 	else return false;
 }
-//Assumes row is signified by a letter A - I.
+//Assumes row is between chars A - I.
 bool isDupInRow(char digit, char row, char board[9][9])
 {
 	for (int col =0; col < 9; col++)
@@ -210,7 +203,7 @@ bool isDupInRow(char digit, char row, char board[9][9])
 	return false;
 }
 
-//Assumes col is signified by a char number 1 - 9
+//Assumes col is between chars 1 - 9
 bool isDupInCol(char digit, char col, char board[9][9])
 {
 	for (int row = 0; row < 9; row++)
@@ -221,6 +214,7 @@ bool isDupInCol(char digit, char col, char board[9][9])
 	return false;
 }
 
+//check if digit is duplicate in sub-square
 bool isDupInSub(char digit, char position[2], char board[9][9])
 {
 	int subX = 3 * ((position[0] - 'A') / 3); //start of x domain
@@ -238,15 +232,17 @@ bool isDupInSub(char digit, char position[2], char board[9][9])
 	return false;
 }
 
+//is digit between 1 - 9
 bool isValidDigit(char digit)
 {
 	if (digit < 49 || digit > 57) return false;
 	else return true;
 }
 
+//is position
 bool isValidPos(char position[2])
 {
-	if (position[0] < 65 || position[0] > 73 || position[1] < 49 || position[1] > 57)
+	if (position[0] < 65 || position[0] > 73 || isValidDigit(position[1]))
 		return false;
        	else return true;
 }
