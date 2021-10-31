@@ -125,6 +125,35 @@ int main() {
 	cout << "Easy has " << countDigits(board) << " pre-filled digits.\n";
 	load_board("medium.dat", board);
 	cout << "Medium has " << countDigits(board) << " pre-filled digits.\n";
+
+	cout << "\n************Alternative difficulty testing **********\n\n";
+	cout << "Counting the number of cycles it takes for the recursive function"; 
+	cout << "to solve the board rather than the number of pre-filled slots.\n\n";
+
+	int stepCounter = 0;
+	load_board("mystery1.dat", board);
+	if (solve_board(board, stepCounter)) 
+	{
+		cout << "Mystery 1 has a solution.\n";
+		display_board(board);
+		cout << "\nIt took " << stepCounter << " steps to solve.\n\n";
+	}
+	stepCounter = 0;
+	load_board("mystery2.dat", board);
+	if (solve_board(board, stepCounter)) 
+	{
+		cout << "Mystery 2 has a solution.\n";
+		display_board(board);
+		cout << "\nIt took " << stepCounter << " steps to solve.\n\n";
+	}
+	stepCounter = 0;
+	load_board("mystery3.dat", board);
+	if (solve_board(board, stepCounter)) 
+	{
+		cout << "Mystery 3 has a solution.\n";
+		display_board(board);
+		cout << "\nIt took " << stepCounter << " steps to solve.\n\n";
+	}
 	
 	return 0;
 }

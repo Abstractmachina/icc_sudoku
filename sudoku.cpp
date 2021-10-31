@@ -91,6 +91,7 @@ bool is_complete(char board[9][9])
 //
 bool make_move(char position[2], char digit, char board[9][9])
 {
+	
 	if (!isValidPos(position)) return false;
 	//check for duplicate entry
 	if (isDup(digit, position, board)) return false;
@@ -131,6 +132,7 @@ bool save_board(const char* filename, char board[9][9])
 	return true;
 }
 
+//recursive function to solve sudoku board
 bool solve_board(char board[9][9])
 {
 	char position[2];
@@ -159,6 +161,38 @@ bool solve_board(char board[9][9])
 	//return false if no viable digits have been found and board is not complete,
 	//thus returning to previous stack frame 
 }
+
+//Alternative overload to check for difficulty
+bool solve_board(char board[9][9], int& stepCounter)
+{
+	stepCounter++;
+	char position[2];
+        if (!findEmptyPos(position, board)) //find first empty position
+		return true; 
+	//if there are no empty positions, 
+	//it means the board is complete. thus return true.
+	
+	for (char digit = '1'; digit <= '9'; digit++) //check for all possible values
+	{
+		if (!isDup(digit, position, board)) //if value passes all duplicate conditions
+		{
+			board[position[0] - 'A'][position[1] - '1'] = digit;
+			if (!solve_board(board, stepCounter)) //go to next empty position recursively.
+			{
+				//if a solution could not be found, 
+				//reset value and move to next digit
+				board[position[0] - 'A'][position[1] - '1'] = '.'; 
+				continue;
+			} else return true;
+
+		} else { ; } //if duplicate, do nothing and move on to next digit
+
+	}
+	return false;
+	//return false if no viable digits have been found and board is not complete,
+	//thus returning to previous stack frame 
+}
+
 
 
 
@@ -242,8 +276,9 @@ bool isValidDigit(char digit)
 //is position
 bool isValidPos(char position[2])
 {
-	if (position[0] < 65 || position[0] > 73 || isValidDigit(position[1]))
+	if (position[0] < 65 || position[0] > 73 || !isValidDigit(position[1])) {
 		return false;
+	}
        	else return true;
 }
 

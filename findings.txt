@@ -1,5 +1,5 @@
 Summarise your findings here (see specification).
 
-Mystery 1 is extremely hard. (23 prefilled slots)
+Mystery 1 is extremely hard. (23 prefilled slots, or 421547 steps to solve)
 Mystery 2 does not have a solution.
-Mystery 3 is hard. (24 prefilled slots)
+Mystery 3 is hard. (24 prefilled slots, or 14134 steps to solve)

@@ -19,6 +19,8 @@ bool save_board(const char* filename, char board[9][9]);
 //check if a solution can be found.
 bool solve_board(char board[9][9]);
 
+//Alternative recursive function to count steps to solve to determine difficulty.
+bool solve_board(char board[9][9], int& stepCounter);
 
 /*****************	UTILITY FUNCTIONS	*******************/
 //Find the first empty position, iterating from top left to bottom right sequentially.
